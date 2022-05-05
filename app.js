@@ -4,12 +4,16 @@ const app = express()
 
 app.set('view engine', 'ejs')
 
+let countries = ['fiji', 'thailand', 'phillipines', 'South Korea', 'japan', 'vietnam']
+
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index', {title: 'This is the index page', countries: countries})
 })
 
+let name = 'valarie tila'
+
 app.get('/about', (req, res) => {
-    res.render('about')
+    res.render('about', {name: name})
 })
 // create a route '/about' and send 'about page' as response
 
