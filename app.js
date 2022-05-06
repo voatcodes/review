@@ -2,7 +2,12 @@ import express from 'express'
 
 const app = express()
 
+// set a template engine for the app, ejs (embeded java script)
+
 app.set('view engine', 'ejs')
+
+// source static files from public
+app.use(express.static('public'))
 
 let countries = ['fiji', 'thailand', 'phillipines', 'South Korea', 'japan', 'vietnam']
 
