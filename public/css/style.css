@@ -15,6 +15,14 @@
     padding-right: 100px;
 }
 
+.error {
+    color: white;
+    background-color: red;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
 header {
     display: flex;
     height: 80px;
