@@ -1,7 +1,16 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
+import mysql from 'mysql'
 
 const app = express()
+
+// create connection with the database
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'review_db'
+})
 
 // set a template engine for the app, ejs (embeded java script)
 
@@ -38,34 +47,36 @@ app.get('/login', (req, res) => {
 // submit login form
 app.post('/login', (req, res) => {
 
-    const user = users.find(user => user.email === req.body.email)
-
-    if(user) {
-        // authenticate 
-        bcrypt.compare(req.body.password, user.password, (error, matches) => {
-            if(matches) {
-                console.log('grant access')
+    connection.query(
+        'SELECT * FROM users WHERE email = ?',
+        [req.body.email],
+        (error, results) => {
+            if(results.length > 0) {
+                // authenticate 
+                bcrypt.compare(req.body.password, results[0].password, (error, matches) => {
+                    if(matches) {
+                        res.redirect('/')
+                    } else {
+                        const user = {
+                            email: req.body.email,
+                            password: req.body.password
+                        }
+                        let message = 'Email/Password mismatch.'
+                        res.render('login', {error: true, message: message, user: user})
+                    }
+                })    
             } else {
                 const user = {
                     email: req.body.email,
                     password: req.body.password
                 }
-                let message = 'Email/Password mismatch.'
+                let message = 'Account does not exist. Please create one.'
                 res.render('login', {error: true, message: message, user: user})
-            
             }
-        })
-        
-    } else {
-        const user = {
-            email: req.body.email,
-            password: req.body.password
         }
-        let message = 'Account does not exist. Please create one.'
-        res.render('login', {error: true, message: message, user: user})
-    }
+    )
 })
-
+    
 // display signup form
 
 app.get('/signup', (req, res) => {
@@ -81,32 +92,38 @@ app.get('/signup', (req, res) => {
 // submit signup form
 app.post('/signup', (req, res) => {
 
+   
+
     if(req.body.password === req.body.confirmPassword) {
 
-        let user = users.find(user => user.email === req.body.email)
+        connection.query(
+            'SELECT email FROM users WHERE email = ?',
+            [req.body.email], 
+            (error, results) => {
+                if(results.length > 0){
+                 const user = {
+                     fullname: req.body.fullname,
+                     email: req.body.email,
+                     password: req.body.password,
+                     confirmPassword: req.body.confirmPassword
+                 }
+                 let message = 'Account already exists with the email provided'
+                 res.render('signup', {error: true, message: message, user: user })
+                } else {
+                 bcrypt.hash(req.body.password, 10, (error, hash) => {
 
-        if(user) {
-            const user = {
-                fullname: req.body.fullname,
-                email: req.body.email,
-                password: req.body.password,
-                confirmPassword: req.body.confirmPassword
+                    connection.query(
+                        'INSERT INTO users (fullname, email, password) VALUES (?,?,?)',
+                        [req.body.fullname, req.body.email, hash],
+                        (error, results) => {
+                            res.redirect('/login')
+                        }
+                    )
+                     
+                 })   
+                }
             }
-            let message = 'Account already exists with the email provided'
-            res.render('signup', {error: true, message: message, user: user })
-    } else {
-        bcrypt.hash(req.body.password, 10, (error, hash) => {
-            const user = {
-                id: users.length + 1,
-                fullname: req.body.fullname,
-                email: req.body.email,
-                password: hash
-            }
-            users.push(user)
-            console.log(user)
-            console.log('Account successsfully created')
-        })
-    }
+         )
         
     } else {
     const user = {
@@ -132,8 +149,7 @@ app.get('/about', (req, res) => {
 // return 404 error
 app.get('*', (req, res) => {
     res.send('404 Error. Page Not Found!')
-}
-)
+})
 
 const PORT = process.env.PORT || 3000
 
