@@ -22,14 +22,7 @@ app.use(express.static('public'))
 // configuration to access form information
 app.use(express.urlencoded({extended:false}))
 
-const users = [
-    {
-        id: 2,
-        fullname: 'Valarie Tila',
-        email: 'valarie@review.com',
-        password: '$2b$10$hveJJj/xI2TawYbQrwZl2ObNlzqUwUQnexQOJk5pT9bk0Zl9nISKm'
-      }
-]
+/* FROM HERE ONWARDS ITS ROUTES*/
 
 app.get('/', (req, res) => {
     res.render('index')
