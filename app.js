@@ -139,6 +139,12 @@ app.get('/about', (req, res) => {
 })
 // create a route '/about' and send 'about page' as response
 
+//create business profile
+app.get('/create-business-profile', (req,res) => {
+    res.render('create-business-profile')
+})
+
+
 // return 404 error
 app.get('*', (req, res) => {
     res.send('404 Error. Page Not Found!')
