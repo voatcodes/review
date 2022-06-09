@@ -24,6 +24,15 @@ app.use(express.urlencoded({extended:false}))
 
 /* FROM HERE ONWARDS ITS ROUTES*/
 
+
+// home page
+app.get('/', (req,res) => {
+    res.render('index')
+})
+
+/* reviewere routes*/
+
+
 app.get('/', (req, res) => {
     res.render('index')
 })
@@ -132,6 +141,10 @@ app.post('/signup', (req, res) => {
 })
 
 
+/* .reviwers' routes end here */
+
+
+/* business profile routes */
 
 
 //display login business profile form
@@ -155,15 +168,16 @@ app.post('/business/login', (req, res) => {
         businessPassword: req.body.password
     }
 
-    let sql = `SELECT * FROM business_profile WHERE b_email = ${profile.businessEmail}`
+    let sql = 'SELECT * FROM business_profile WHERE b_email = ?'
     connection.query(
-        sql, (error, results) => {
+        sql, [profile.businessEmail],
+        (error, results) => {
 
             if(results.length > 0) {
                 // authenticate 
                 bcrypt.compare(profile.businessPassword, results[0].b_password, (error, matches) => {
                     if(matches) {
-                        res.send('redirect to business dashboard')
+                        res.redirect('/business/dashboard')
                     } else {
                         let message = 'Incorrect Password'
                         res.render('login-business', {error: true, message: message, profile: profile})
@@ -172,23 +186,11 @@ app.post('/business/login', (req, res) => {
                 })    
             } else {
                 let message = 'Business profile does not exist. Please create one.'
-                res.render('login-business-profile', {error: true, message: message, user: user})
+                res.render('login-business', {error: true, message: message, profile: profile})
             }
         }
     )
 })
-
-
-
-app.get('/about', (req, res) => {
-    res.render('about', {name: name})
-})
-// create a route '/about' and send 'about page' as response
-
-//create business profile
-// app.get('/create-business-profile', (req,res) => {
-//     res.render('create-business-profile')
-// })
 
 
 //display create business profile form
@@ -260,7 +262,7 @@ app.post('/business/create-profile', (req, res) => {
                                 profile.business.tagLine,
                                 profile.business.category,
                                 profile.business.description,
-                                profile.business.location,,
+                                profile.business.location,
                                 profile.rep.name,
                                 profile.rep.contacts,
                                 profile.rep.email,
@@ -268,7 +270,7 @@ app.post('/business/create-profile', (req, res) => {
                             ],
                             (error, results) => {
 
-                                res.send(results)
+                                res.redirect('/business/login')
                             }
                         )
                         
@@ -276,20 +278,21 @@ app.post('/business/create-profile', (req, res) => {
                 }
             }
         )
-    
-//     } else {
-//         let message = 'Password and confirm password does not match'
-//         res.render('create-business-profile', {error: true, message: message, profile: profile})
-//     } 
-// })
-
-} else {
-    
-    let message = 'Password and confirm password does not match'
-    res.render('create-business-profile', {error: true, message: message, profile: profile})
-}
+    } else {
+        
+        let message = 'Password and confirm password does not match'
+        res.render('create-business-profile', {error: true, message: message, profile: profile})
+    }
     
 })
+
+//business dashboard
+app.get('/business/dashboard', (req,res) => {
+    res.render('business-profile')
+})
+
+/*  .business routes end here */
+
 
 // return 404 error
 app.get('*', (req, res) => {
