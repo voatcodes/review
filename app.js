@@ -1,6 +1,7 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
 import mysql from 'mysql'
+import session from 'express-session'
 
 const app = express()
 
@@ -12,15 +13,39 @@ const connection = mysql.createConnection({
     database: 'review_db'
 })
 
+
+
 // set a template engine for the app, ejs (embeded java script)
 
 app.set('view engine', 'ejs')
+
+//create session middleware 
+app.use(session({
+    secret:'siri',
+    resave: false,
+    saveUninitialized: false
+}))
 
 // source static files from public
 app.use(express.static('public'))
 
 // configuration to access form information
 app.use(express.urlencoded({extended:false}))
+
+//constantly check if user is logged in
+app.use((req, res, next) => {
+    if(req.session.userID === undefined) {
+        res.locals.isLoggedIn = false
+        console.log('user not signed in')
+    } else {
+        res.locals.isLoggedIn = true
+        res.locals.username = req.session.username
+        res.locals.business = req.session.business
+        console.log(`logged in as a ${req.session.user}`)
+    }
+    next()
+})
+
 
 /* FROM HERE ONWARDS ITS ROUTES*/
 
@@ -57,6 +82,9 @@ app.post('/login', (req, res) => {
                 // authenticate 
                 bcrypt.compare(req.body.password, results[0].password, (error, matches) => {
                     if(matches) {
+                        req.session.userID = results[0].userID
+                        req.session.username = results[0].fullname.split(' ')[0]
+                        req.session.user = 'reviewer'
                         res.redirect('/')
                     } else {
                         const user = {
@@ -177,6 +205,10 @@ app.post('/business/login', (req, res) => {
                 // authenticate 
                 bcrypt.compare(profile.businessPassword, results[0].b_password, (error, matches) => {
                     if(matches) {
+                        req.session.userID = results[0].b_id
+                        req.session.business = results[0].b_name
+                        req.session.username = results[0].b_contact_person.split(' ')[0]
+                        req.session.user = 'business'
                         res.redirect('/business/dashboard')
                     } else {
                         let message = 'Incorrect Password'
@@ -288,10 +320,23 @@ app.post('/business/create-profile', (req, res) => {
 
 //business dashboard
 app.get('/business/dashboard', (req,res) => {
-    res.render('business-profile')
+    if(res.locals.isLoggedIn && req.session.user === 'business') {
+        res.render('business-profile')
+    } else {
+        res.redirect('/business/login')
+    }
+    
 })
 
 /*  .business routes end here */
+
+//logout functionality
+app.get('/logout', (req, res) => {
+    // kill session
+    req.session.destroy((error) => {
+res.redirect('/')
+    })
+})
 
 
 // return 404 error
