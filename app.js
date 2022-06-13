@@ -40,7 +40,7 @@ app.use((req, res, next) => {
     } else {
         res.locals.isLoggedIn = true
         res.locals.username = req.session.username
-        res.locals.business = req.session.business
+        res.locals.business = req.session.profile
         console.log(`logged in as a ${req.session.user}`)
     }
     next()
@@ -209,6 +209,7 @@ app.post('/business/login', (req, res) => {
                         req.session.business = results[0].b_name
                         req.session.username = results[0].b_contact_person.split(' ')[0]
                         req.session.user = 'business'
+                        req.session.profile = results[0]
                         res.redirect('/business/dashboard')
                     } else {
                         let message = 'Incorrect Password'
