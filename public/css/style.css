@@ -380,6 +380,28 @@ text-decoration: underline #4083d0;
 
 #business-dashboard #profile .info{
     width: 35%;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+
+
+
+
+#business-dashboard #profile .detail{
+    margin: 0;
+    padding: 0;
+}
+
+#business-dashboard #profile a{
+    background-color: #417741;
+    border: 1px solid #417741;
+    color: white;
+    padding: 6px 8px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+
 }
 
 
