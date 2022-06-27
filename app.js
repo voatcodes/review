@@ -250,10 +250,14 @@ app.post('/edit-profile/:id', upload.single('photoURL'), (req, res) => {
         facebookURL: req.body.facebookURL,
         twitterURL: req.body.twitterURL,
         instagramURL: req.body.instagramURL,
-        photoURL: req.file.filename
+        photoURL: undefined
     }
 
-    let sql = 'UPDATE users SET fullname = ?, email = ?, phone_number = ?, location = ?, facebookURL = ?, twitterURL = ?, instagramURL = ?, photoURL = ? WHERE userID = ?'
+    if(req.file) {
+
+        profile.photoURL= req.file.filename
+        let sql = 'UPDATE users SET fullname = ?, email = ?, phone_number = ?, location = ?, facebookURL = ?, twitterURL = ?, instagramURL = ?, photoURL = ? WHERE userID = ?'
+        
 
     connection.query(
       sql,
@@ -270,8 +274,32 @@ app.post('/edit-profile/:id', upload.single('photoURL'), (req, res) => {
       ],
       (error, results)  => {
         res.redirect('/profile')
+        console.log(profile)
       } 
     )
+
+    } else {
+        let sql = 'UPDATE users SET fullname = ?, email = ?, phone_number = ?, location = ?, facebookURL = ?, twitterURL = ?, instagramURL = ? WHERE userID = ?'
+
+    connection.query(
+      sql,
+      [ 
+        profile.fullname,
+        profile.email,
+        profile.phonNumber,
+        profile.location,
+        profile.facebookURL,
+        profile.twitterURL,
+        profile.instagramURL,
+        req.session.userID
+      ],
+      (error, results)  => {
+        res.redirect('/profile')
+        console.log(profile)
+      } 
+    )
+
+    }
 
 })
 
