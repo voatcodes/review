@@ -411,6 +411,35 @@ text-decoration: underline #4083d0;
 
 /* end. business dashboard */
 
+
+/* reviewer's profile */
+
+#reviewer-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#reviewer-profile > * {
+    margin: 0 auto;
+
+}
+
+#reviewer-profile div{
+    height: 200px;
+    width: 200px;
+    
+}
+
+#reviewer-profile img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    
+}
+
+/* end. revewer's profile */
+
 footer {
     height: 60px;
     display: grid;
