@@ -194,8 +194,12 @@ app.get('/profile', (req,res) => {
                     id: results[0].userID,
                     name: results[0].fullname,
                     email: results[0].email,
+                    phoneNumber: results[0].phone_number,
+                    location: results[0].location,
+                    facebookURL: results[0].facebookURL,
+                    twitterURL: results[0].twitterURL,
+                    instagramURL: results[0].instagramURL,
                     photoURL: results[0].photoURL
-
                 }
 
                 res.render('reviewer-profile', {profile: profile})
@@ -262,9 +266,9 @@ app.post('/edit-profile/:id', upload.single('photoURL'), (req, res) => {
     connection.query(
       sql,
       [ 
-        profile.fullname,
+        profile.name,
         profile.email,
-        profile.phonNumber,
+        profile.phoneNumber,
         profile.location,
         profile.facebookURL,
         profile.twitterURL,
@@ -284,9 +288,9 @@ app.post('/edit-profile/:id', upload.single('photoURL'), (req, res) => {
     connection.query(
       sql,
       [ 
-        profile.fullname,
+        profile.name,
         profile.email,
-        profile.phonNumber,
+        profile.phoneNumber,
         profile.location,
         profile.facebookURL,
         profile.twitterURL,
@@ -571,5 +575,5 @@ app.get('*', (req, res) => {
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-    console.log('Server up. Application running...')
+    console.log('Server up. Application running')
 })
