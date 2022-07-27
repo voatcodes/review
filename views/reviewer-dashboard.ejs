@@ -5,7 +5,7 @@
         <% for(let business of businesses) { %>
 
             <div class="business">
-                <div class="biz-img"><img src="" alt=""></div>
+                <div class="biz-img"><img src="/uploads/<%= business.b_photoURL %>" alt=""></div>
                 <div class="biz-info">
                     <p class="name"><%= business.b_name %></p>
                     <p class="tagline"><%= business.b_tag_line %></p>
