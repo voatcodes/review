@@ -561,7 +561,7 @@ app.post('/business/edit-profile/:id', upload.single('photoURL'), (req, res) => 
                         profile.rep.email,
                         parseInt(req.params.id)
                     ],
-                    (error, results) => {
+                    (error,results) => {
                         res.redirect('/business/dashboard')
                     }
                 )
