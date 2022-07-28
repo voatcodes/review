@@ -538,28 +538,37 @@ text-decoration: underline #4083d0;
     padding: 10px;
     margin-bottom: 15px;
     width: 30%;
-    border: 1px solid black;
+    align-items: center;
 }
 
 #reviewer-dashboard .business .biz-img{
-    width: 120px;
-    height: 120px;
-    background-color: #979797;
-    border-radius: 15px;
+    width: 30%;
+    height: 90px;
 }
 
 #reviewer-dashboard .business .biz-img img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    
-
+    object-fit: cover;
+    border-radius: 50%;
 }
+
+#reviewer-dashboard .business .biz-info{
+    width: 70%;
+    margin-left: 10px;
+}
+
+
 
 #reviewer-dashboard .business .name{
     font-weight: bold;
-
 }
+
+#reviewer-dashboard .business .location{
+    font-style: italic;
+}
+
+
 
 
 
