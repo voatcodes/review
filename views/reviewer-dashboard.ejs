@@ -7,7 +7,7 @@
             <div class="business">
                 <div class="biz-img"><img src="/uploads/<%= business.b_photoURL %>" alt=""></div>
                 <div class="biz-info">
-                    <p class="name"><%= business.b_name %></p>
+                    <p class="name"><a href="/business/<%= business.b_id %>"><%= business.b_name %></a></p>
                     <p class="tagline"><%= business.b_tag_line %></p>
                     <p class="location"><%= business.b_location %></p>
                 </div>
