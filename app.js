@@ -599,6 +599,18 @@ app.post('/business/edit-profile/:id', upload.single('photoURL'), (req, res) => 
     })
 })
 
+app.get('/business/:id', (req, res) => {
+    connection.query(
+        'SELECT * FROM business_profile WHERE b_id = ?',
+        [parseInt(req.params.id)],
+         (error, results) => {
+            console.log(results)
+         }
+
+
+    )
+})
+
 /*  .business routes end here */
 
 //logout functionality
