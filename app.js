@@ -604,7 +604,8 @@ app.get('/business/:id', (req, res) => {
         'SELECT * FROM business_profile WHERE b_id = ?',
         [parseInt(req.params.id)],
          (error, results) => {
-            console.log(results)
+            // console.log(results)
+            res.render('review-biz-profile', {profile:results[0]})
          }
 
 
