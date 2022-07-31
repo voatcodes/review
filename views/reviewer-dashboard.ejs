@@ -1,5 +1,7 @@
 <%- include('partials/header') %>
 
+    
+
     <main class="container" id="reviewer-dashboard">
 
         <% for(let business of businesses) { %>
@@ -7,7 +9,7 @@
             <div class="business">
                 <div class="biz-img"><img src="/uploads/<%= business.b_photoURL %>" alt=""></div>
                 <div class="biz-info">
-                    <p class="name"><a href="/business/<%= business.b_id %>"><%= business.b_name %></a></p>
+                    <p class="name"><a href="/business/<%= business.b_id  %>"><%= business.b_name %></a></p>
                     <p class="tagline"><%= business.b_tag_line %></p>
                     <p class="location"><%= business.b_location %></p>
                 </div>
@@ -18,6 +20,20 @@
 
 
     </main>
+
+    <script>
+
+        let businesses = document.querySelectorAll('.business')
+
+        businesses.forEach(business => {
+            business.addEventListener('click', () => {
+               location.href = business.children[1].firstElementChild.firstElementChild.href
+            })  
+        })
+
+
+        
+    </script>
 
 
     <%- include('partials/footer')%>
