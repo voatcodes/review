@@ -1,6 +1,14 @@
 <%- include('partials/header') %>
 
 <main class="container">
+    <p id="jina"><%= profile.b_name %></p>
+    <p><%= profile.b_location %></p>
+    <p id="rbpcontact"><%= profile.b_phone_number %></p>
+    <img id="rbpimg" src="/uploads/<%= profile.b_photoURL %>" alt="">
+    <p id="rbpdescription"><%= profile.b_description %></p>
+    <a id="rbpa" href="/app"> GO BACK</a>
+    
+
 
     
 </main>
