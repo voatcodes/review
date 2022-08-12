@@ -1,12 +1,77 @@
 <%- include('partials/header') %>
 
-<main class="container">
-    <p id="jina"><%= profile.b_name %></p>
-    <p><%= profile.b_location %></p>
-    <p id="rbpcontact"><%= profile.b_phone_number %></p>
-    <img id="rbpimg" src="/uploads/<%= profile.b_photoURL %>" alt="">
-    <p id="rbpdescription"><%= profile.b_description %></p>
-    <a id="rbpa" href="/app"> GO BACK</a>
+<main class="container" id="rbpmain">
+    <div class="firstandsecondsectionrbpa">
+        <div class="firstsectionrbpa">
+            <img id="rbpimg" src="/uploads/<%= profile.b_photoURL %>" alt="">
+            <p id="jina"><%= profile.b_name %></p>
+            <p id="rbpdescription"><%= profile.b_description %></p>
+            <p id="rbpcontact"> <img id="rbpaicons" src="/uploads/telephone-call.png"><%= profile.b_phone_number %></p>
+            <p id="rbpemail"><img id="rbpaicons" src="/uploads/email.png"><%= profile.b_email %></p>
+            <p id="rbplocation"><img id="rbpaicons" src="/uploads/pin.png"><%= profile.b_location %></p>
+            <a id="rbp1" href="/app"> Write a review </a>
+        
+       
+        </div>
+    
+        <div class="secondsectionrbpa">
+
+           <div class="rowssection2rbp" id="firstrowrowssection2rbp">
+            <div id="userprofilepicrba"></div>
+            <div class="paragraphsection2rbp">
+                <h3 id="headingsection2rbp"> Customer 1 </h3>
+                <p id="paragraphsection2rbp">Lorem ipsum dolor sit amet, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, dignissimos?consectetur adipisicing elit. </p>
+                <div class="section2images">
+                    <div id="section2images"></div>
+                    <div id="section2images"></div>
+                    <div id="section2images"></div>
+                </div>
+
+                <p id="dateandtime">04/08/2022 17:55:19</p>
+            </div>
+           </div>
+           <div id="linesection2rbp"></div>
+
+
+
+            <div class="rowssection2rbp">
+                <div id="userprofilepicrba"></div>
+            <div class="paragraphsection2rbp">
+                <h3 id="headingsection2rbp"> Customer 2 </h3>
+                <p id="paragraphsection2rbp">Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, illum.consectetur adipisicing.</p>
+                
+                <div class="section2images">
+                    <div id="section2images"></div>
+                    <div id="section2images"></div>
+                    <div id="section2images"></div>
+                </div>
+                <p id="dateandtime">04/08/2022 17:55:19</p>
+            </div>
+            </div>
+            <div id="linesection2rbp"></div>
+            
+
+            <div class="rowssection2rbp">
+                <div id="userprofilepicrba"></div>
+            <div class="paragraphsection2rbp">
+                <h3 id="headingsection2rbp"> Customer 3 </h3>
+                <p id="paragraphsection2rbp">Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, architecto.consectetur adipisicing elit. </p>
+                <div class="section2images">
+                    <div id="section2images"></div>
+                    <div id="section2images"></div>
+                    <div id="section2images"></div>
+                </div>
+                <p id="dateandtime">04/08/2022 17:55:19</p>
+            </div>
+            </div>
+            <div id="linesection2rbp"></div>
+
+        </div>
+    </div>
+
+    <div class="thirdsectionrbpa">
+        <a id="rbp2" href="/app"> GO BACK</a>
+    </div>
     
 
 
