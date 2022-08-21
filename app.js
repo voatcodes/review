@@ -317,6 +317,22 @@ app.post('/edit-profile/:id', upload.single('photoURL'), (req, res) => {
 
 })
 
+
+/* create a review */
+
+app.get('/review/:id', (req, res) => {
+    if (res.locals.isLoggedIn) {
+        res.render('review', {b_id: parseint[req.params.id]})
+    } else {
+        res.redirect('/login')
+    }
+
+}) 
+
+app.post('/review/:id', upload.array('pictures'), (req, res) => {
+
+})
+
 /* .reviewers' routes end here */
 
 
