@@ -1,0 +1,14 @@
+<%- include('partials/header')%>
+
+<main class="container" id="review-form">
+
+    <form action="/review/<%= b_id %>" method="post" enctype="multipart/form-data">
+        <label for="">Review</label>
+        <textarea name="review" id="" cols="30" rows="10"></textarea>
+        <label for="">Attach pictures(optional)</label>
+        <input type="file" name="pictures" id="" multiple>
+        <input type="submit" value="send">
+    </form>
+</main>
+
+<%- include('partials/footer')%>
