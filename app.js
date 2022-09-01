@@ -322,7 +322,7 @@ app.post('/edit-profile/:id', upload.single('photoURL'), (req, res) => {
 
 app.get('/review/:id', (req, res) => {
     if (res.locals.isLoggedIn) {
-        res.render('review', {b_id: parseint[req.params.id]})
+        res.render('review', {b_id: parseInt(req.params.id)})
     } else {
         res.redirect('/login')
     }
@@ -330,6 +330,13 @@ app.get('/review/:id', (req, res) => {
 }) 
 
 app.post('/review/:id', upload.array('pictures'), (req, res) => {
+
+    const review = {
+        comment: req.body.review,
+        pictures: undefined
+    }
+
+    res.send(req.files.map(file => file.filename))
 
 })
 
