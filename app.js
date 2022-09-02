@@ -332,13 +332,55 @@ app.get('/review/:id', (req, res) => {
 app.post('/review/:id', upload.array('pictures'), (req, res) => {
 
     const review = {
+        userID: req.session.userID,
+        b_id: parseInt(req.params.id),
         comment: req.body.review,
         pictures: undefined
     }
 
-    res.send(req.files.map(file => file.filename))
+    let sql
+
+    if (req.files){
+        review.pictures= req.files.map(file => file.filename)
+
+        sql = 'INSERT INTO reviews(userID_fk, b_id_fk, review, pictures) VALUES(?,?,?, JSON_ARRAY(?))'
+        connection.query(
+            sql,
+            [
+                review.userID,
+                review.b_id,
+                review.comment,
+                [...review.pictures]
+            ],
+            (error, results) => {
+                res.send('Business reviewed')
+
+            }
+        )
+
+        
+
+    } else {
+
+        sql = 'INSERT INTO reviews(userID_fk, b_id_fk, review) VALUES(?,?,?)'
+        connection.query(
+            sql,
+            [
+                review.userID,
+                review.b_id,
+                review.comment
+            ],
+            (error, results) => {
+                res.send('Business reviewed')
+
+            }
+        )
+
+    }
 
 })
+
+/* end of create a review route*/
 
 /* .reviewers' routes end here */
 
