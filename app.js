@@ -669,8 +669,20 @@ app.get('/business/:id', (req, res) => {
         'SELECT * FROM business_profile WHERE b_id = ?',
         [parseInt(req.params.id)],
          (error, results) => {
-            // console.log(results)
-            res.render('review-biz-profile', {profile:results[0]})
+            
+            let businessProfile=results[0]
+            //get reviews for this business
+            let sql= 'SELECT fullname, photoURL, review, pictures, date_posted FROM reviews JOIN users on userID= userID_fk WHERE b_id_fk = ?'
+            connection.query(
+                sql,
+                [parseInt(req.params.id)],
+                (error, results) => {
+                    res.render('review-biz-profile', {profile:businessProfile, reviews:results})
+                    
+                }
+
+            ) 
+           
          }
 
 
