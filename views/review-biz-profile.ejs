@@ -13,8 +13,33 @@
         
        
         </div>
-    
+
         <div class="secondsectionrbpa">
+            <% reviews.forEach(review => {%>
+                <div class="review">
+                    <img src="/uploads/<%= review.photoURL %>" alt="">
+                    <div class="info">
+                        <h1><%= review.fullname %></h1>
+                        <p> <%= review.review %></p>
+                        <div> 
+                            <% if(JSON.parse(review.pictures).length > 0){ %>
+                                <% JSON.parse(review.pictures).forEach( picture => { %>
+                                    <img src="/uploads/<%= picture%>" alt="">
+
+                                <% }) %>
+                           <%  }%>
+                        </div>
+                        <small><%= review.date_posted %></small>
+                    </div>
+                </div>
+
+            <% })%>
+
+
+
+        </div>
+    
+        <!-- <div class="secondsectionrbpa">
 
            <div class="rowssection2rbp" id="firstrowrowssection2rbp">
             <div id="userprofilepicrba"></div>
@@ -66,7 +91,7 @@
             </div>
             <div id="linesection2rbp"></div>
 
-        </div>
+        </div> -->
     </div>
 
     <div class="thirdsectionrbpa">
