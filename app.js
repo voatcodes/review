@@ -353,7 +353,7 @@ app.post('/review/:id', upload.array('pictures'), (req, res) => {
                 [...review.pictures]
             ],
             (error, results) => {
-                res.send('Business reviewed')
+                res.redirect(`/business/${review.b_id}`)
 
             }
         )
