@@ -371,7 +371,7 @@ app.post('/review/:id', upload.array('pictures'), (req, res) => {
                 review.comment
             ],
             (error, results) => {
-                res.send('Business reviewed')
+                res.redirect(`/business/${review.b_id}`)
 
             }
         )
@@ -665,28 +665,35 @@ app.post('/business/edit-profile/:id', upload.single('photoURL'), (req, res) => 
 })
 
 app.get('/business/:id', (req, res) => {
-    connection.query(
-        'SELECT * FROM business_profile WHERE b_id = ?',
-        [parseInt(req.params.id)],
-         (error, results) => {
-            
-            let businessProfile=results[0]
-            //get reviews for this business
-            let sql= 'SELECT fullname, photoURL, review, pictures, date_posted FROM reviews JOIN users on userID= userID_fk WHERE b_id_fk = ?'
-            connection.query(
-                sql,
-                [parseInt(req.params.id)],
-                (error, results) => {
-                    res.render('review-biz-profile', {profile:businessProfile, reviews:results})
-                    
-                }
+    if (res.locals.isLoggedIn) {
 
-            ) 
-           
-         }
-
-
-    )
+        connection.query(
+            'SELECT * FROM business_profile WHERE b_id = ?',
+            [parseInt(req.params.id)],
+             (error, results) => {
+                
+                let businessProfile=results[0]
+                //get reviews for this business
+                let sql= 'SELECT fullname, photoURL, review, pictures, date_posted FROM reviews JOIN users on userID= userID_fk WHERE b_id_fk = ? ORDER BY date_posted DESC'
+                connection.query(
+                    sql,
+                    [parseInt(req.params.id)],
+                    (error, results) => {
+                        res.render('review-biz-profile', {profile:businessProfile, reviews:results})
+                        
+                    }
+    
+                ) 
+               
+             }
+    
+    
+        )
+        
+    } else {
+      res.redirect('/login')  
+    }
+    
 })
 
 /*  .business routes end here */
