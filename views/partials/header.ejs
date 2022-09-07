@@ -13,16 +13,17 @@
         <p><a href="/">review</a></p>
         <nav>
             <ul>
-                <li class="nav-link"><a href="">How it works</a></li>
+                <!-- <li class="nav-link"><a href="">How it works</a></li>
                 <li class="nav-link"><a href="">Pricing</a></li>
-                <li class="nav-link"><a href="">Support</a></li>
+                <li class="nav-link"><a href="">Support</a></li> -->
 
                 <% if(locals.isLoggedIn) {%>
 
                     <% if(locals.user === 'reviewer') { %>
                         <li class="nav-link"><a href="/profile">My Account</a></li>
                         <% } %>
-                    <li class="nav-ink"><a href="/logout">Log Out</a></li>
+                    <li class="nav-link"><a href="/app">Businesses</a></li>
+                    <li class="nav-link"><a href="/logout">Log Out</a></li>
                 <% } else {%>  
                     <li id="login"><a href="/login">Log In</a></li>
                     <li id="signup"><a href="/signup">Sign Up</a></li>
@@ -34,5 +35,3 @@
     </header>
     
 
-</body>
-</html>
