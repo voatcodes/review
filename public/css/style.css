@@ -598,14 +598,9 @@ text-decoration: underline #4083d0;
 }
 
 .firstandsecondsectionrbpa{
-    height: 80vh;
     padding-top: 25px;
-    /* object-fit: contain; */
     display: flex;
-    /* flex-direction: column; */
     background-color: #f3efe8fe;
-    /* width: 100%;
-    width: 1300px; */
 }
 
 .firstsectionrbpa{
@@ -748,6 +743,16 @@ display: flex;
 
 } */
 
+.secondsectionrbpa{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    height: 70vh;
+    overflow: auto;
+    width: 70%;
+
+}
+
 .secondsectionrbpa .review{
     display: flex;  
     /* border: 1px solid black;  */
@@ -817,6 +822,9 @@ footer {
     height: 60px;
     display: grid;
     place-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 
