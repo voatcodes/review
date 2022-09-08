@@ -664,6 +664,9 @@ app.post('/business/edit-profile/:id', upload.single('photoURL'), (req, res) => 
     })
 })
 
+
+// business id
+
 app.get('/business/:id', (req, res) => {
     if (res.locals.isLoggedIn) {
 
