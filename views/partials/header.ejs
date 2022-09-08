@@ -21,7 +21,9 @@
 
                     <% if(locals.user === 'reviewer') { %>
                         <li class="nav-link"><a href="/profile">My Account</a></li>
-                        <% } %>
+                    <% } else { %>
+                        <li class="nav-link"><a href="/business/dashboard">Dashboard</a></li>
+                    <% }%>    
                     <li class="nav-link"><a href="/app">Businesses</a></li>
                     <li class="nav-link"><a href="/logout">Log Out</a></li>
                 <% } else {%>  
