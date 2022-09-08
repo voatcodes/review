@@ -745,7 +745,7 @@ display: flex;
 
 .secondsectionrbpa{
     background-color: white;
-    padding: 20px;
+    padding: 25px 20px;
     border-radius: 10px;
     height: 70vh;
     overflow: auto;
@@ -783,6 +783,7 @@ display: flex;
 
 .secondsectionrbpa .info div{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .secondsectionrbpa .info p{
