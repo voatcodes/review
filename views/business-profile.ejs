@@ -26,7 +26,36 @@
         
         
     </div>
-    <div id="reviews"></div>
+    <div id="reviews">
+        <% if (reviews.length > 0) { %>
+            <% reviews.forEach(review => {%>
+                <div class="review">
+                   <div class="profile-pic">
+                    <img src="/uploads/<%= review.photoURL %>" alt="">
+                   </div>
+                    <div class="info">
+                        <h1><%= review.fullname %></h1>
+                        <p> <%= review.review %></p>
+                        <div > 
+                            <% if(JSON.parse(review.pictures).length > 0){ %>
+                                <% JSON.parse(review.pictures).forEach( picture => { %>
+                                    <img class="photosfromreviews" src="/uploads/<%= picture%>" alt="">
+
+                                <% }) %>
+                           <%  }%>
+                        </div>
+                        <small><%= review.date_posted.toString().split(' G')[0] %></small>
+                    </div>
+                </div>
+
+            <% })%>
+
+        <% } else { %>
+
+            <h3>This business has not been reviewed yet</h3>
+
+        <% }%>
+    </div>
     
 </main>
 
