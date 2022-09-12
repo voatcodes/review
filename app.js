@@ -540,7 +540,18 @@ app.get('/business/dashboard', (req, res) => {
         connection.query(
             sql, [req.session.userID],
             (error, results) => {
-                res.render('business-profile', { profile: results[0] })
+                let businessProfile = results[0]
+                 //get reviews for this business
+                 let sql= 'SELECT fullname, photoURL, review, pictures, date_posted FROM reviews JOIN users on userID= userID_fk WHERE b_id_fk = ? ORDER BY date_posted DESC'
+                 connection.query(
+                     sql,
+                     [req.session.userID],
+                     (error, results) => {
+                         res.render('business-profile', {profile:businessProfile, reviews:results})
+        
+                     }
+     
+                 )
             }
         )
 
