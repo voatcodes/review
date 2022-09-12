@@ -31,10 +31,10 @@
                         <div class="info">
                             <h1><%= review.fullname %></h1>
                             <p> <%= review.review %></p>
-                            <div> 
+                            <div > 
                                 <% if(JSON.parse(review.pictures).length > 0){ %>
                                     <% JSON.parse(review.pictures).forEach( picture => { %>
-                                        <img src="/uploads/<%= picture%>" alt="">
+                                        <img class="photosfromreviews" src="/uploads/<%= picture%>" alt="">
     
                                     <% }) %>
                                <%  }%>
@@ -120,6 +120,32 @@
 
     
 </main>
+
+<script>
+    let imgs = document.querySelectorAll(".photosfromreviews");
+
+    imgs.forEach(img => {
+        img.addEventListener('click', () => {
+            enlargeImg(img)
+            
+       
+        })
+
+    }) 
+    
+    function enlargeImg(img) {
+        img.style.transform = "scale(1.5)";
+        img.style.transition = "transform 0.25s ease";
+    }
+
+    function resetImg(img) {
+        
+        img.style.transform = "scale(1)";
+        img.style.transition = "transform 0.25s ease";
+    }
+
+    
+</script>
 
 
 
