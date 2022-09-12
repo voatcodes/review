@@ -368,7 +368,7 @@ text-decoration: underline #4083d0;
 }
 
 #business-dashboard #profile{
-   width: 40%;
+   width: 30%;
 }
 
 #business-dashboard #profile div{
@@ -376,6 +376,10 @@ text-decoration: underline #4083d0;
     height: 250px;
     background-color: #b9b6b0;
     border-radius: 10px;
+}
+
+#business-dashboard #profile img{
+    width: 100%; 
 }
 
 #business-dashboard #profile .info{
@@ -405,8 +409,13 @@ text-decoration: underline #4083d0;
 }
 
 
-#business_dashboard #reviews{
-   width: 55%;
+#business-dashboard #reviews{
+    width: 70%;
+    background-color: white;
+    padding: 25px 20px;
+    border-radius: 10px;
+    height: 70vh;
+    overflow: auto;
 }
 
 /* end. business dashboard */
@@ -753,7 +762,7 @@ display: flex;
 
 }
 
-.secondsectionrbpa .review{
+.secondsectionrbpa .review, #business-dashboard #reviews .review{
     display: flex;  
     /* border: 1px solid black;  */
     margin-bottom: 10px;
@@ -761,7 +770,7 @@ display: flex;
     padding-bottom: 10px;
 }
 
-.secondsectionrbpa .profile-pic{
+.secondsectionrbpa .profile-pic, #business-dashboard #reviews  .profile-pic{
     height: 150px;
     width: 150px;
     background-color: rgb(79, 78, 78);
@@ -769,28 +778,28 @@ display: flex;
 
 }
 
-.secondsectionrbpa .profile-pic img{
+.secondsectionrbpa .profile-pic img, #business-dashboard #reviews .profile-pic img{
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.secondsectionrbpa .info{
+.secondsectionrbpa .info, #business-dashboard #reviews .info{
     width: 65%;
     margin-left: 15px;
 }
 
-.secondsectionrbpa .info div{
+.secondsectionrbpa .info div, #business-dashboard #reviews .info div{
     display: flex;
     flex-wrap: wrap;
 }
 
-.secondsectionrbpa .info p{
+.secondsectionrbpa .info p, #business-dashboard #reviews .info p{
     margin-bottom: 5px;
 }
 
-.secondsectionrbpa .info img{
+.secondsectionrbpa .info img, #business-dashboard #reviews .info img{
     height: 120px;
 }
 
